@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using ShapeStore.Application.Interfaces;
-using ShapeStore.Domain.Models;
+using ShapeStore.Application.Services;
+using ShapeStore.Domain.Entities;
 using ShapeStore.Infrastructure.Repositories;
 using NetTopologySuite.IO.Converters;
 
@@ -17,6 +18,7 @@ namespace ShapeStore.Infrastructure
 
             services.AddScoped(typeof(Repository<Location>));
             services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
+            services.AddScoped<ILocationService, LocationService>();
 
             // for minimal APIs, configure the GeoJSON converter
             services.ConfigureHttpJsonOptions(options =>

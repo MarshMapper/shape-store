@@ -1,5 +1,5 @@
 ﻿#nullable disable
-namespace ShapeStore.Domain.Models;
+namespace ShapeStore.Domain.Entities;
 
 public partial class Icon
 {

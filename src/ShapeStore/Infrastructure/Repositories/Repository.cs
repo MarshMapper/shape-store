@@ -5,7 +5,7 @@ using ShapeStore.Application.Interfaces;
 namespace ShapeStore.Infrastructure.Repositories
 {
     // generic repository base class implementation that handles CRUD operations.  derived classes
-    // can add additional methods as needed.
+    // can add more specific methods if needed.
     public class Repository<T> : IRepository<T> where T : class
     {
         protected readonly ShapeStoreContext _context;
@@ -14,15 +14,15 @@ namespace ShapeStore.Infrastructure.Repositories
             _context = context;
         }
         // get all entities of type T in the database
-        public async Task<Result<IAsyncEnumerable<T>>> GetAllAsync()
+        public async Task<Result<IReadOnlyCollection<T>>> GetAllAsync()
         {
             try
             {
-                return Result<IAsyncEnumerable<T>>.Success(_context.Set<T>().AsAsyncEnumerable<T>());
+                return Result<IReadOnlyCollection<T>>.Success(await _context.Set<T>().ToListAsync<T>());
             }
             catch (Exception ex)
             {
-                return Result<IAsyncEnumerable<T>>.Error(ex.Message);
+                return Result<IReadOnlyCollection<T>>.Error(ex.Message);
             }
         }
         // get a single entity of type T by its id

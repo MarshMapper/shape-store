@@ -9,8 +9,7 @@
 
   <ItemGroup>
     <Folder Include="Application\Dto\" />
-    <Folder Include="Domain\Models\" />
-    <Folder Include="Domain\" />
+    <Folder Include="Domain\Entities\" />
   </ItemGroup>
 
   <ItemGroup>

@@ -1,6 +1,6 @@
 ﻿using Ardalis.Result.AspNetCore;
-using ShapeStore.Domain.Models;
-using ShapeStore.Infrastructure.Repositories;
+using ShapeStore.Domain.Entities;
+using ShapeStore.Application.Interfaces;
 
 namespace ShapeStore.Web
 {
@@ -17,25 +17,25 @@ namespace ShapeStore.Web
         }
         public static RouteGroupBuilder MapLocationEndpoints(this RouteGroupBuilder locationGroup)
         {
-            locationGroup.MapGet("", async (Repository<Location> repository) =>
+            locationGroup.MapGet("", async (ILocationService locationService) =>
             {
-                return (await repository.GetAllAsync()).ToMinimalApiResult();
+                return (await locationService.GetAllAsync()).ToMinimalApiResult();
             });
-            locationGroup.MapPut("", async (Repository<Location> repository, Location location) =>
+            locationGroup.MapPut("", async (ILocationService locationService, Location location) =>
             {
-                return (await repository.UpdateAsync(location)).ToMinimalApiResult();
+                return (await locationService.UpdateAsync(location)).ToMinimalApiResult();
             });
-            locationGroup.MapPost("", async (Repository<Location> repository, Location location) =>
+            locationGroup.MapPost("", async (ILocationService locationService, Location location) =>
             {
-                return (await repository.AddAsync(location)).ToMinimalApiResult();
+                return (await locationService.AddAsync(location)).ToMinimalApiResult();
             });
-            locationGroup.MapGet("{id}", async (Repository<Location> repository, int id) =>
+            locationGroup.MapGet("{id}", async (ILocationService locationService, int id) =>
             {
-                return (await repository.GetByIdAsync(id)).ToMinimalApiResult();
+                return (await locationService.GetByIdAsync(id)).ToMinimalApiResult();
             });
-            locationGroup.MapDelete("{id}", async (Repository<Location> repository, int id) =>
+            locationGroup.MapDelete("{id}", async (ILocationService locationService, int id) =>
             {
-                return (await repository.DeleteAsync(id)).ToMinimalApiResult();
+                return (await locationService.DeleteAsync(id)).ToMinimalApiResult();
             });
             return locationGroup;
         }
