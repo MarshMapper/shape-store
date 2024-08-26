@@ -19,6 +19,7 @@ public partial class ShapeStoreContext : DbContext
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
+        // categories of locations.  these may vary based on the application
         modelBuilder.Entity<Category>(entity =>
         {
             entity.ToTable("Category");
@@ -32,7 +33,7 @@ public partial class ShapeStoreContext : DbContext
                 .HasForeignKey(d => d.IconId)
                 .HasConstraintName("FK_Category_Icon");
         });
-
+        // available icons
         modelBuilder.Entity<Icon>(entity =>
         {
             entity.ToTable("Icon");
@@ -43,7 +44,7 @@ public partial class ShapeStoreContext : DbContext
                 .IsRequired()
                 .HasMaxLength(50);
         });
-
+        // one location including a shape representing its location or boundary
         modelBuilder.Entity<Location>(entity =>
         {
             entity.ToTable("Location");
