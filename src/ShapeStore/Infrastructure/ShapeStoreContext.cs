@@ -1,6 +1,6 @@
 ﻿#nullable disable
 using Microsoft.EntityFrameworkCore;
-using ShapeStore.Domain.Models;
+using ShapeStore.Domain.Entities;
 
 namespace ShapeStore.Infrastructure;
 

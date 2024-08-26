@@ -2,7 +2,7 @@
 
 namespace ShapeStore.Application.Interfaces
 {
-    public interface IRepository<T> where T : class
+    public interface ICrudService<T> where T : class
     {
         Task<Result<IReadOnlyCollection<T>>> GetAllAsync();
         Task<Result<T>> GetByIdAsync(int id);

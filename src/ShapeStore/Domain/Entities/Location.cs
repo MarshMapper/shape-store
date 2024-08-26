@@ -2,7 +2,7 @@
 using NetTopologySuite.Geometries;
 using NetTopologySuite.IO.Converters;
 using System.Text.Json.Serialization;
-namespace ShapeStore.Domain.Models;
+namespace ShapeStore.Domain.Entities;
 
 public partial class Location
 {
