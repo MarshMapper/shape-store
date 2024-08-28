@@ -59,7 +59,7 @@ public partial class ShapeStoreContext : DbContext
             entity.Property(e => e.PostalCode).HasMaxLength(16);
             entity.Property(e => e.State).HasMaxLength(50);
             entity.Property(e => e.Url).HasMaxLength(512);
-            entity.Property(e => e.Coordinates).HasColumnType("geography");
+            entity.Property(e => e.Geometry).HasColumnType("geography");
 
             entity.HasOne(d => d.Category).WithMany(p => p.Locations)
                 .HasForeignKey(d => d.CategoryId)
