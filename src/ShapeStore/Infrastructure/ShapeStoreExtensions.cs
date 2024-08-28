@@ -19,6 +19,8 @@ namespace ShapeStore.Infrastructure
             services.AddScoped(typeof(Repository<Location>));
             services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
             services.AddScoped<ILocationService, LocationService>();
+            services.AddScoped<ICategoryService, CategoryService>();
+            services.AddScoped<IIconService, IconService>();
 
             // for minimal APIs, configure the GeoJSON converter
             services.ConfigureHttpJsonOptions(options =>
