@@ -2,14 +2,10 @@
 using ShapeStore.Domain.Entities;
 using ShapeStore.Application.Interfaces;
 
-namespace ShapeStore.Web
+namespace ShapeStore.Web.Endpoints
 {
-    public static class EndpointExtensions
+    public static class LocationEndpoints
     {
-        public static void MapEndpoints(this WebApplication app)
-        {
-            app.MapLocationGroup();
-        }
         public static void MapLocationGroup(this WebApplication app)
         {
             app.MapGroup("/locations")

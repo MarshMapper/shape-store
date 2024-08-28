@@ -2,7 +2,7 @@
 
 namespace ShapeStore.Application.Interfaces
 {
-    public interface ILocationService : ICrudService<Location>
+    public interface IIconService : ICrudService<Icon>
     {
     }
 }

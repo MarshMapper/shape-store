@@ -8,6 +8,7 @@ namespace ShapeStore.Application.Validators
         public LocationValidator()
         {
             RuleFor(x => x.Name).NotEmpty();
+            RuleFor(x => x.Name).MaximumLength(256).WithMessage("Name must be 256 characters or less");
             RuleFor(x => x.Phone).MaximumLength(20).WithMessage("Phone number must be 20 characters or less");
             RuleFor(x => x.Phone2).MaximumLength(50).WithMessage("Phone2 number must be 50 characters or less");
             RuleFor(x => x.Address1).MaximumLength(256).WithMessage("Address1 must be 256 characters or less");

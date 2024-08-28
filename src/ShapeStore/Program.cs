@@ -1,5 +1,5 @@
 using ShapeStore.Infrastructure;
-using ShapeStore.Web;
+using ShapeStore.Web.Endpoints;
 
 namespace ShapeStore
 {
