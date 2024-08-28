@@ -16,11 +16,12 @@ public partial class Location
     public string Phone { get; set; }
     public string Phone2 { get; set; }
     public string Url { get; set; }
-    [JsonConverter(typeof(GeoJsonConverterFactory))]
-    public Geometry Coordinates { get; set; }
     public bool? IsOpen { get; set; }
     public int? CategoryId { get; set; }
     public int? IconId { get; set; }
     public string Notes { get; set; }
+    [JsonConverter(typeof(GeoJsonConverterFactory))]
+    public Geometry Geometry { get; set; }
+    [JsonIgnore]
     public virtual Category Category { get; set; }
 }

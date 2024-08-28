@@ -1,5 +1,7 @@
-﻿using ShapeStore.Domain.Entities;
+﻿using FluentValidation;
+using ShapeStore.Domain.Entities;
 using ShapeStore.Application.Interfaces;
+using ShapeStore.Application.Validators;
 
 namespace ShapeStore.Application.Services
 {
@@ -7,6 +9,10 @@ namespace ShapeStore.Application.Services
     {
         public LocationService(IRepository<Location> repository) : base(repository)
         {
+        }
+        public override IValidator<Location> GetValidator()
+        {
+            return new LocationValidator();
         }
     }
 }

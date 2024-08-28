@@ -1,9 +1,10 @@
 ﻿using Ardalis.Result;
+using FluentValidation;
 using ShapeStore.Application.Interfaces;
 
 namespace ShapeStore.Application.Services
 {
-    public class CrudService<T> : ICrudService<T> where T : class
+    public abstract class CrudService<T> : ICrudService<T> where T : class
     {
         private readonly IRepository<T> _repository;
 
@@ -21,14 +22,27 @@ namespace ShapeStore.Application.Services
         {
             return _repository.GetByIdAsync(id);
         }
+        public abstract IValidator<T> GetValidator();
 
-        public Task<Result<T>> AddAsync(T entity)
+        public virtual Task<Result<T>> AddAsync(T entity)
         {
+            IValidator<T> validator = GetValidator();
+            var validationResult = validator.Validate(entity);
+            if (!validationResult.IsValid)
+            {
+                return Task.FromResult(Result<T>.Invalid(new ValidationError(validationResult.ToString())));
+            }
             return _repository.AddAsync(entity);
         }
 
         public Task<Result<T>> UpdateAsync(T entity)
         {
+            IValidator<T> validator = GetValidator();
+            var validationResult = validator.Validate(entity);
+            if (!validationResult.IsValid)
+            {
+                return Task.FromResult(Result<T>.Invalid(new ValidationError(validationResult.ToString())));
+            }
             return _repository.UpdateAsync(entity);
         }
 
