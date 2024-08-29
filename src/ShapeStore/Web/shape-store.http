@@ -1,0 +1,65 @@
+@LocationsEndpoint={{$projectUrl}}/locations
+
+GET {{LocationsEndpoint}}
+Accept: application/json
+
+###
+GET {{LocationsEndpoint}}/27
+Accept: application/json
+
+###
+# @name createRequest
+POST {{LocationsEndpoint}}
+Content-Type: application/json
+Accept: application/json
+{
+        "locationId": 0,
+        "name": "Add New",
+        "address1": null,
+        "address2": null,
+        "city": null,
+        "state": null,
+        "postalCode": "12345",
+        "phone": "555-1212",
+        "phone2": null,
+        "url": null,
+        "geometry": {
+            "type": "Point",
+            "coordinates": [-74.0, 44.5 ]
+        },
+        "isOpen": null,
+        "categoryId": null,
+        "iconId": null,
+        "notes": null,
+        "category": null
+}
+###
+@created={{createRequest.response.body.locationId}}
+PUT {{LocationsEndpoint}}
+Content-Type: application/json
+Accept: application/json
+{
+        "locationId": {{created}},
+        "name": "Updated new one",
+        "address1": null,
+        "address2": null,
+        "city": null,
+        "state": null,
+        "postalCode": "23456",
+        "phone": "555-5555",
+        "phone2": null,
+        "url": null,
+        "geometry": {
+            "type": "Point",
+            "coordinates": [-74.0, 44.5 ]
+        },
+        "isOpen": null,
+        "categoryId": null,
+        "iconId": null,
+        "notes": null,
+        "category": null
+}
+###
+
+DELETE https://{{LocationsEndpoint}}/{{created}}
+Accept: application/json
