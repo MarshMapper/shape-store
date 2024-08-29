@@ -1,5 +1,7 @@
 ﻿using Ardalis.Result;
 using FluentValidation;
+using Ardalis.Result.FluentValidation;
+
 using ShapeStore.Application.Interfaces;
 
 namespace ShapeStore.Application.Services
@@ -30,7 +32,7 @@ namespace ShapeStore.Application.Services
             var validationResult = validator.Validate(entity);
             if (!validationResult.IsValid)
             {
-                return Task.FromResult(Result<T>.Invalid(new ValidationError(validationResult.ToString())));
+                return Task.FromResult(Result<T>.Invalid(FluentValidationResultExtensions.AsErrors(validationResult)));
             }
             return _repository.AddAsync(entity);
         }
@@ -41,7 +43,7 @@ namespace ShapeStore.Application.Services
             var validationResult = validator.Validate(entity);
             if (!validationResult.IsValid)
             {
-                return Task.FromResult(Result<T>.Invalid(new ValidationError(validationResult.ToString())));
+                return Task.FromResult(Result<T>.Invalid(FluentValidationResultExtensions.AsErrors(validationResult)));
             }
             return _repository.UpdateAsync(entity);
         }
