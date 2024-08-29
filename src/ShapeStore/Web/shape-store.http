@@ -4,6 +4,11 @@ GET {{LocationsEndpoint}}
 Accept: application/json
 
 ###
+
+GET {{LocationsEndpoint}}/geojson
+Accept: application/json
+
+###
 GET {{LocationsEndpoint}}/27
 Accept: application/json
 

@@ -6,6 +6,7 @@ using ShapeStore.Application.Interfaces;
 
 namespace ShapeStore.Application.Services
 {
+    // generic CRUD service based on generic repository
     public abstract class CrudService<T> : ICrudService<T> where T : class
     {
         private readonly IRepository<T> _repository;
@@ -14,12 +15,10 @@ namespace ShapeStore.Application.Services
         {
             _repository = repository;
         }
-
         public Task<Result<IReadOnlyCollection<T>>> GetAllAsync()
         {
             return _repository.GetAllAsync();
         }
-
         public Task<Result<T>> GetByIdAsync(int id)
         {
             return _repository.GetByIdAsync(id);

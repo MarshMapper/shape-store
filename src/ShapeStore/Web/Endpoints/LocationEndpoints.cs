@@ -17,6 +17,10 @@ namespace ShapeStore.Web.Endpoints
             {
                 return (await locationService.GetAllAsync()).ToMinimalApiResult();
             });
+            locationGroup.MapGet("geojson", async (ILocationService locationService) =>
+            {
+                return (await locationService.GetAllAsyncAsFeatureCollection()).ToMinimalApiResult();
+            });
             locationGroup.MapPut("", async (ILocationService locationService, Location location) =>
             {
                 return (await locationService.UpdateAsync(location)).ToMinimalApiResult();
