@@ -9,8 +9,8 @@ namespace ShapeStore.Application.Services
 {
     public class LocationService : CrudService<Location>, ILocationService
     {
-        private IRepository<Location> _repository;
-        public LocationService(IRepository<Location> repository) : base(repository)
+        private ILocationRepository _repository;
+        public LocationService(ILocationRepository repository) : base(repository)
         {
             _repository = repository;
         }
@@ -19,10 +19,10 @@ namespace ShapeStore.Application.Services
             return new LocationValidator();
         }
         // return all locations as a FeatureCollection, which will be serialized to GeoJSON
-        public async Task<Result<FeatureCollection>> GetAllAsyncAsFeatureCollection()
+        public async Task<Result<FeatureCollection>> GetAllAsyncAsFeatureCollection(ISpatialQuery? spatialQuery = null)
         {
             FeatureCollection featureCollection = new FeatureCollection();
-            var locationResult = await _repository.GetAllAsync();
+            var locationResult = await _repository.GetAllAsync(spatialQuery);
             if (locationResult.IsSuccess)
             {
                 foreach (var location in locationResult.Value)

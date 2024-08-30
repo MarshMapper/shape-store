@@ -1,6 +1,7 @@
 ﻿using Ardalis.Result.AspNetCore;
 using ShapeStore.Domain.Entities;
 using ShapeStore.Application.Interfaces;
+using ShapeStore.Application.Services;
 
 namespace ShapeStore.Web.Endpoints
 {
@@ -17,9 +18,16 @@ namespace ShapeStore.Web.Endpoints
             {
                 return (await locationService.GetAllAsync()).ToMinimalApiResult();
             });
-            locationGroup.MapGet("geojson", async (ILocationService locationService) =>
+            // get locations as GeoJSON, optionally filtering results by distance from a given point
+            locationGroup.MapGet("geojson", async (ILocationService locationService, double? radius = null, double? lat = null, double? lon = null) =>
             {
-                return (await locationService.GetAllAsyncAsFeatureCollection()).ToMinimalApiResult();
+                SpatialQuery? spatialQuery = null;
+
+                if (radius.HasValue || lat.HasValue || lon.HasValue)
+                {
+                    spatialQuery = new SpatialQuery(SpatialQueryType.WithinRadius, lat, lon, radius);
+                }
+                return (await locationService.GetAllAsyncAsFeatureCollection(spatialQuery)).ToMinimalApiResult();
             });
             locationGroup.MapPut("", async (ILocationService locationService, Location location) =>
             {

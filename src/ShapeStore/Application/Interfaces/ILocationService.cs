@@ -6,6 +6,6 @@ namespace ShapeStore.Application.Interfaces
 {
     public interface ILocationService : ICrudService<Location>
     {
-        Task<Result<FeatureCollection>> GetAllAsyncAsFeatureCollection();
+        Task<Result<FeatureCollection>> GetAllAsyncAsFeatureCollection(ISpatialQuery? spatialQuery = null);
     }
 }
