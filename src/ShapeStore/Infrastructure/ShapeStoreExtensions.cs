@@ -16,7 +16,7 @@ namespace ShapeStore.Infrastructure
                 options => options.UseSqlServer(configurationManager.GetConnectionString("ShapeConnection"),
                     sqlServerOptions => sqlServerOptions.UseNetTopologySuite()));
 
-            services.AddScoped(typeof(Repository<Location>));
+            services.AddScoped(typeof(ILocationRepository), typeof(LocationRepository));
             services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
             services.AddScoped<ILocationService, LocationService>();
             services.AddScoped<ICategoryService, CategoryService>();

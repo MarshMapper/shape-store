@@ -8,8 +8,9 @@ This project is currently using only System.Text.Json and relies on the NTS supp
 currently a subset of the full features available.  
 
 Endpoints are available for CRUD operations on Locations and related entities.  An additional endpoint returns
-all the locations in GeoJSON format.
+all the locations in GeoJSON format.  That endpoint also supports a query string to filter the results by distance from a point
+
+     /locations/geojson?lat=44.5&lon=-74.0&radius=50
 
 ## Testing
-The Web folder contains a .http file that can be used to test the API.
-
+The Web folder contains a file shape-store.http that can be used to test the API.

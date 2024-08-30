@@ -1,4 +1,5 @@
 ﻿using Ardalis.Result;
+using ShapeStore.Application.Services;
 
 namespace ShapeStore.Application.Interfaces
 {

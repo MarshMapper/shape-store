@@ -9,6 +9,11 @@ GET {{LocationsEndpoint}}/geojson
 Accept: application/json
 
 ###
+
+GET {{LocationsEndpoint}}/geojson?lat=44.5&lon=-74.0&radius=50
+Accept: application/json
+
+###
 GET {{LocationsEndpoint}}/27
 Accept: application/json
 
