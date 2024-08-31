@@ -7,9 +7,12 @@ namespace ShapeStore.Infrastructure.Repositories
 {
     public class LocationRepository : Repository<Location>, ILocationRepository
     {
-        public LocationRepository(ShapeStoreContext context) : base(context)
+        private readonly IDistanceConverter _distanceConverter;
+        public LocationRepository(ShapeStoreContext context, IDistanceConverter distanceConverter) : base(context)
         {
+            _distanceConverter = distanceConverter;
         }
+        // provide overload that accepts a spatial query to filter results based on the geography column
         public async Task<Result<IReadOnlyCollection<Location>>> GetAllAsync(ISpatialQuery? spatialQuery = null)
         { 
             if (spatialQuery == null)
@@ -30,7 +33,8 @@ namespace ShapeStore.Infrastructure.Repositories
 
                 // EF Core / NTS will convert this to a spatial query
                 var locations = await _context.Locations
-                    .Where(l => l.Geometry.IsWithinDistance(point, spatialQuery.Radius.Value))
+                    .Where(l => l.Geometry.IsWithinDistance(point, 
+                        _distanceConverter.Convert(spatialQuery.Radius.Value, spatialQuery.DistanceUnit, DistanceUnit.Meter)))
                     .ToListAsync();
                 return Result<IReadOnlyCollection<Location>>.Success(locations);
             }

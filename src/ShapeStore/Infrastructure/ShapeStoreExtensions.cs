@@ -21,6 +21,7 @@ namespace ShapeStore.Infrastructure
             services.AddScoped<ILocationService, LocationService>();
             services.AddScoped<ICategoryService, CategoryService>();
             services.AddScoped<IIconService, IconService>();
+            services.AddScoped<IDistanceConverter, DistanceConverter>();
 
             // for minimal APIs, configure the GeoJSON converter
             services.ConfigureHttpJsonOptions(options =>

@@ -19,13 +19,19 @@ namespace ShapeStore.Web.Endpoints
                 return (await locationService.GetAllAsync()).ToMinimalApiResult();
             });
             // get locations as GeoJSON, optionally filtering results by distance from a given point
-            locationGroup.MapGet("geojson", async (ILocationService locationService, double? radius = null, double? lat = null, double? lon = null) =>
+            locationGroup.MapGet("geojson", async (ILocationService locationService, 
+                double? radius = null, 
+                double? lat = null, 
+                double? lon = null,
+                string unit = "mi") =>
             {
                 SpatialQuery? spatialQuery = null;
 
                 if (radius.HasValue || lat.HasValue || lon.HasValue)
                 {
-                    spatialQuery = new SpatialQuery(SpatialQueryType.WithinRadius, lat, lon, radius);
+                    // currently only supports radius queries
+                    spatialQuery = new SpatialQuery(SpatialQueryType.WithinRadius,
+                        new DistanceConverter().FromString(unit), lat, lon, radius);
                 }
                 return (await locationService.GetAllAsyncAsFeatureCollection(spatialQuery)).ToMinimalApiResult();
             });
