@@ -10,7 +10,7 @@ Accept: application/json
 
 ###
 
-GET {{LocationsEndpoint}}/geojson?lat=44.5&lon=-74.0&radius=50
+GET {{LocationsEndpoint}}/geojson?lat=40.55&lon=-73.99&radius=50?unit=mi
 Accept: application/json
 
 ###
