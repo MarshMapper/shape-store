@@ -1,20 +1,18 @@
 @LocationsEndpoint={{$projectUrl}}/locations
 
+# get all locations
 GET {{LocationsEndpoint}}
 Accept: application/json
 
 ###
-
+# get all locations as GeoJSON
 GET {{LocationsEndpoint}}/geojson
 Accept: application/json
 
 ###
 
-GET {{LocationsEndpoint}}/geojson?lat=40.55&lon=-73.99&radius=50?unit=mi
-Accept: application/json
-
-###
-GET {{LocationsEndpoint}}/27
+# find points within radius of given point
+GET {{LocationsEndpoint}}/geojson?lat=40.55&lon=-73.99&radius=50&unit=mi
 Accept: application/json
 
 ###
@@ -35,7 +33,7 @@ Accept: application/json
         "url": null,
         "geometry": {
             "type": "Point",
-            "coordinates": [-74.0, 44.5 ]
+            "coordinates": [ -73.00, 40.45 ]
         },
         "isOpen": null,
         "categoryId": null,
@@ -43,8 +41,21 @@ Accept: application/json
         "notes": null,
         "category": null
 }
+
 ###
-@created={{createRequest.response.body.locationId}}
+# the Visual Studio team is working on it, but the current release
+# does not yet support Named Requests.  when that's available it 
+# will allow us to use the response from one request in other requests.
+# when available change following to "{{createRequest.response.body.locationId}}"
+# For now, change following to Id returned by POST above, then remaining
+# calls should work.
+@created=56
+
+GET {{LocationsEndpoint}}/{{created}}
+Accept: application/json
+
+###
+ 
 PUT {{LocationsEndpoint}}
 Content-Type: application/json
 Accept: application/json
@@ -61,7 +72,7 @@ Accept: application/json
         "url": null,
         "geometry": {
             "type": "Point",
-            "coordinates": [-74.0, 44.5 ]
+            "coordinates": [ -73.00, 40.45 ]
         },
         "isOpen": null,
         "categoryId": null,
@@ -71,5 +82,5 @@ Accept: application/json
 }
 ###
 
-DELETE https://{{LocationsEndpoint}}/{{created}}
+DELETE {{LocationsEndpoint}}/{{created}}
 Accept: application/json
