@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using ShapeStore.Application.Interfaces;
 using ShapeStore.Domain.Entities;
+using ShapeStore.Infrastructure.DbContexts;
 
 namespace ShapeStore.Infrastructure.Repositories
 {

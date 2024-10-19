@@ -1,6 +1,7 @@
 ﻿#nullable disable
 using NetTopologySuite.Geometries;
 using NetTopologySuite.IO.Converters;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Text.Json.Serialization;
 namespace ShapeStore.Domain.Entities;
 
