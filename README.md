@@ -1,6 +1,6 @@
 # shape-store
 
-.NET 8 service using EF Core and NetTopologySuite (NTS) to manage spatial data.  The advantage of
+.NET 9 service using EF Core and NetTopologySuite (NTS) to manage spatial data.  The advantage of
 NetTopologySuite over previous approaches that relied on the SqlGeography type is that it can work
 with multiple data stores including SQL Server and PostgreSQL / PostGIS.
 
